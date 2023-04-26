@@ -1,1 +1,1 @@
-module.exports = 'phrase_secrete'
+module.exports = 'phrase_de_securité'
