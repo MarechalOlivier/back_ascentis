@@ -66,7 +66,7 @@ const initDb = () => {
 
 sequelize.authenticate()                                                //Permet d'établir la connexion avec la base de donnée en utilisant les information d'identification contenu dans variable "sequelize" 
     .then(() => console.log
-    (colors.green('!----- La connexion à la base de données a bien été établie -----!'))) //Si la connexion est établie, affiche le message suivant 
+    (colors.green('!----- La connexion à la base de données "Ascentis" a bien été établie -----!'))) //Si la connexion est établie, affiche le message suivant 
     .catch(error => console.error
         (colors.red(`*****Impossible de se connecter à la base de données*****         
 *****${error}*****`)));                                                 //Sinon affiche ce message avec la problème rencontré
