@@ -14,11 +14,7 @@ const sequelize = new Sequelize('ascentis', 'root', '', {               //Initia
 const CustomerModel = CustomerModelSequelize(sequelize, DataTypes)      //Création du modèle sequelize "CustomerModel" et de la fonction "CustomerModelSequelize" avec les objet sequelize et dataTypes 
 const TicketModel = TicketModelSequelize(sequelize, DataTypes)          //Utilise la bibliothèque sequelize pour intéragir avec la base de donnée                                                             
 
-
-
-
-
-                                                                        
+                                                                       
 const initDb = () => {
     return sequelize.sync() 
     .then(() => {
