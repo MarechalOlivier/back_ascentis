@@ -22,6 +22,7 @@ app
 
 const ticketRouter = require('./routes/ticketRoutes')
 const customerRouter = require('./routes/customerRoute')
+const userRouter = require('./routes/userRoute')
 ///////////////////////////////////////////////////////////////////////////////////
 
 // const userRouter = require('./routes/userRoutes')
@@ -30,6 +31,7 @@ const customerRouter = require('./routes/customerRoute')
 
 app.use('/api/customer', customerRouter)
 app.use('/api/ticket', ticketRouter)
+app.use('/api/user', userRouter)
 ///////////////////////////////////////////////////////////////////////////////////
 
 

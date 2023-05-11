@@ -1,7 +1,9 @@
+const bcrypt = require('bcrypt');
 const { Sequelize, DataTypes } = require('sequelize');                  //Importantion du Module "sequelize" ORM
 const colors = require('colors');                                       //Importation du Module "colors" permet de changer la couleur du texte dans le terminal
 const CustomerModelSequelize = require('../models/customer')            //Importation du modèle "customer"
-const TicketModelSequelize = require('../models/ticket') 
+const TicketModelSequelize = require('../models/ticket')
+const UserModelSequelize = require('../models/user') 
 const tickets = require('../mock-tickets');            
 
 const sequelize = new Sequelize('ascentis', 'root', '', {               //Initialise la connexion avec la base de donnée ascentis, l'utilisateur root et pas de mot de passe
@@ -12,7 +14,13 @@ const sequelize = new Sequelize('ascentis', 'root', '', {               //Initia
 
 
 const CustomerModel = CustomerModelSequelize(sequelize, DataTypes)      //Création du modèle sequelize "CustomerModel" et de la fonction "CustomerModelSequelize" avec les objet sequelize et dataTypes 
-const TicketModel = TicketModelSequelize(sequelize, DataTypes)          //Utilise la bibliothèque sequelize pour intéragir avec la base de donnée                                                             
+const TicketModel = TicketModelSequelize(sequelize, DataTypes)
+const UserModel = UserModelSequelize(sequelize, DataTypes)
+
+
+
+
+//Utilise la bibliothèque sequelize pour intéragir avec la base de donnée                                                             
 
                                                                        
 const initDb = () => {
@@ -34,10 +42,10 @@ const initDb = () => {
         //     })
         // })
 
-        // bcrypt.hash('mdp', 10)
+        // bcrypt.hash('Ascentis@33', 12)
         //     .then((hash) => {
         //         UserModel.create({
-        //             username: 'paul',
+        //             username: 'olivier@ascentis.fr',
         //             password: hash,
         //             roles: ['user', 'admin']
         //         })
@@ -67,6 +75,6 @@ sequelize.authenticate()                                                //Permet
 
 
 module.exports = {                                                      //Export les fonctionnalités d'un module pour d'autres module
-    sequelize, CustomerModel, TicketModel, initDb
+    sequelize, CustomerModel, TicketModel, UserModel, initDb
 }
 
