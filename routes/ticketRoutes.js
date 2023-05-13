@@ -7,6 +7,7 @@ router
     .route('/')
     .get(ticketController.findAllTickets)
     .post(authController.protect, ticketController.createTicket)
+    
 
 router
     .route('/withReview')

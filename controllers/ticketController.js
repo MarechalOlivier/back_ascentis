@@ -137,12 +137,16 @@ exports.createTicket = (req, res) => {
     let newTicket = req.body;
 
     TicketModel.create({
-        name: newTicket.name,
-        price: newTicket.price,
+        client_name: newTicket.client_name,
+        client_number: newTicket.client_number,
+        type: newTicket.type,
+        urgency: newTicket.urgency,
+        category: newTicket.category,
+        subject: newTicket.subject,
+        description: newTicket.description,
         address: newTicket.address,
-        picture: newTicket.picture,
-        superficy: newTicket.superficy,
-        capacity: newTicket.capacity
+        phone: newTicket.phone,
+       
     }).then((el) => {
         const msg = 'Un ticket a bien été ajouté.'
         res.json({ message: msg, data: el })

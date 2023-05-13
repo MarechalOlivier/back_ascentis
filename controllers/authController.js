@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const privateKey = require('../auth/private_key')
 
-exports.login = (req, res) => {
+exports.login = (req, res) => { 
     if(!req.body.username || !req.body.password){
         const msg = "Veuillez fournir un nom d'utilisateur et un mot de passe."
         return res.status(400).json({message: msg})
@@ -62,10 +62,10 @@ exports.signup = (req, res) => {
         })
 }
 
-exports.protect = (req, res, next) => {
-    const authorizationHeader = req.headers.authorization
+exports.protect = (req, res, next) => { 
+    const authorizationHeader = req.headers.authorization 
 
-    if(!authorizationHeader){
+    if(!authorizationHeader){ 
         const message = "Un jeton est nécessaire pour accéder à la ressource"
         return res.status(401).json({message})
     }

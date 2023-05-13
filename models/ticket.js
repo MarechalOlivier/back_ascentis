@@ -4,17 +4,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
-        },
-
-        client_number: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            validate: {
-                isInt: {
-                  msg: 'Ce champ doit être renseigné et être un nombre entier.'
-                }
-              }
-        },
+        },      
 
         client_name: {
             type: DataTypes.STRING,
@@ -28,8 +18,18 @@ module.exports = (sequelize, DataTypes) => {
                 }
               }
         },
+
+        client_number: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+                isInt: {
+                  msg: 'Ce champ doit être renseigné et être un nombre entier.'
+                }
+              }
+        },
         
-        // Exo, ajouter la validation de nombres entiers
+        
         type: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -60,6 +60,16 @@ module.exports = (sequelize, DataTypes) => {
               }
         },
 
+        subject: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: {
+                  msg: 'Ce champ doit être renseigné.'
+                }
+              }
+        },
+
         description: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -72,7 +82,21 @@ module.exports = (sequelize, DataTypes) => {
 
         address: {
             type: DataTypes.JSON,
-        }
+        },
+
+        phone: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: {
+                    msg: 'Ce champ doit être renseigné.'
+                },
+                is: {
+                    args: /^\+?\d{8,15}$/,
+                    msg: 'Veuillez saisir un numéro de téléphone valide.'
+                }
+            }
+        }   
 
     }, {
         timestamps: true,
