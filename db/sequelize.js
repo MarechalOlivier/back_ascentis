@@ -29,19 +29,19 @@ const initDb = () => {
         // création des 5 tickets dans la bdd, avec une boucle, 
         // message à afficher en console : La liste des {5} tickets a bien été créée.
         
-    //     tickets.forEach((element) => {
-    //         TicketModel.create({               
-    //             client_name: element.client_name,
-    //             client_number: element.client_number,
-    //             type: element.type,
-    //             urgency: element.urgency,
-    //             category: element.category,
-    //             subject: element.subject,
-    //             description: element.description,
-    //             address: element.address,
-    //             phone: element.phone,
-    //         })
-    //     })
+        // tickets.forEach((element) => {
+        //     TicketModel.create({               
+        //         client_name: element.client_name,
+        //         client_number: element.client_number,
+        //         type: element.type,
+        //         urgency: element.urgency,
+        //         category: element.category,
+        //         subject: element.subject,
+        //         description: element.description,
+        //         address: element.address,
+        //         phone: element.phone,
+        //     })
+        // })
 
         // bcrypt.hash('Ascentis@33', 12)
         //     .then((hash) => {
