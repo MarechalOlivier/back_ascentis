@@ -1,34 +1,39 @@
 const { Op, UniqueConstraintError, ValidationError } = require('sequelize');
-const { UserModel, ReviewModel } = require('../db/sequelize')
+const { UserModel, ReviewModel, CustomerModel } = require('../db/sequelize')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const privateKey = require('../auth/private_key')
 
-exports.login = (req, res) => { 
-    if(!req.body.username || !req.body.password){
+
+
+exports.login = (req, res) => {  //exporter la fonction login qui est visible dans routes\customerRoute.js sous le nom de authController.login avec le router
+    if(!req.body.username || !req.body.password){ // Si le nom d'utilisateur ou le mot de passe n'est pas fourni
         const msg = "Veuillez fournir un nom d'utilisateur et un mot de passe."
         return res.status(400).json({message: msg})
     }
     
-    UserModel.findOne({ where : {username: req.body.username}})
+    CustomerModel.findOne({ where : {username: req.body.username}}) // On cherche l'utilisateur dans la base de données avec le nom d'utilisateur fourni dans le body
         .then(user => {
-            if(!user){
-                const msg = "L'utilisateur demandé n'existe pas."
+            if(!user){ // Si l'utilisateur n'existe pas
+                const msg = "L'utilisateur demandé n'existe pas." // On renvoie un message d'erreur
                 return res.status(404).json({message: msg})
             }
 
-            bcrypt.compare(req.body.password, user.password)
-                .then(isValid => {
-                    if(!isValid){
+            bcrypt.compare(req.body.password, user.password) // On compare le mot de passe fourni dans le body avec le mot de passe de l'utilisateur trouvé dans la base de données
+                
+                .then(isValid => { // isValid est un booléen qui vaut true si les mots de passe correspondent, false sinon
+                    if(!isValid){// Si le mot de passe est incorrect
                         const msg = "Le mot de passe est incorrect."
                         return res.status(404).json({message: msg})
                     }
 
                     // json web token
-                    const token = jwt.sign({
-                        data: user.id
+                    const token = jwt.sign({ // On crée un token
+                        username: user.username,
+                        roles: user.roles,    
                       }, privateKey, { expiresIn: '1h' }); // Expiration du token au bout d'une heure
 
+                      
                     const msg = "L'utilisateur a été connecté avec succès."
                     user.password = "hidden"
                     return res.json({message: msg, user, token})
@@ -39,6 +44,9 @@ exports.login = (req, res) => {
             return res.status(500).json({message: msg, error})
         })
 }
+
+
+
 
 exports.signup = (req, res) => {
     // 1. on récupère le password dans le body et on le hash .then()
@@ -82,12 +90,13 @@ exports.protect = (req, res, next) => {
     return next();
 }
 
-exports.restrictTo = (...roles) => {
-    return (req, res, next) => {
-        UserModel.findByPk(req.userId)
+exports.restrictTo = (...roles) => { 
+    return (req, res, next) => { 
+        
+        CustomerModel.findByPk(req.userId) // 
             .then(user => { 
                 console.log(user.username, user.id, roles) 
-                if(!user || !roles.every(role => user.roles.includes(role))){
+                if(!user || !roles.every(role => user.roles.includes(role))){ 
                     const message = "Droits insuffisants";
                     return res.status(403).json({message}) 
                 }

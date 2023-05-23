@@ -17,6 +17,7 @@ router
     .route('/:id')
     .get(ticketController.findTicketByPk)
     .put(authController.protect, ticketController.updateTicket)
-    .delete(authController.protect, authController.restrictTo('user', 'admin'), ticketController.deleteTicket)
+    // .delete(authController.protect, authController.restrictTo('user', 'admin'), ticketController.deleteTicket)
+    .delete(ticketController.deleteTicket, authController.protect )
 
 module.exports = router; 

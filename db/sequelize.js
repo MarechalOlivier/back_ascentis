@@ -4,7 +4,9 @@ const colors = require('colors');                                       //Import
 const CustomerModelSequelize = require('../models/customer')            //Importation du modèle "customer"
 const TicketModelSequelize = require('../models/ticket')
 const UserModelSequelize = require('../models/user') 
-const tickets = require('../mock-tickets');            
+const customers = require('../mock-customers');
+const tickets = require('../mock-tickets');                         //Importation du fichier "mock-tickets"
+const cors = require('cors');
 
 const sequelize = new Sequelize('ascentis', 'root', '', {               //Initialise la connexion avec la base de donnée ascentis, l'utilisateur root et pas de mot de passe
     host: 'localhost',                                                  //En local
@@ -23,7 +25,7 @@ const UserModel = UserModelSequelize(sequelize, DataTypes)
 //Utilise la bibliothèque sequelize pour intéragir avec la base de donnée                                                             
 
                                                                        
-const initDb = () => {
+const initDb = () => { //
     return sequelize.sync() 
     .then(() => {
         // création des 5 tickets dans la bdd, avec une boucle, 
@@ -38,16 +40,30 @@ const initDb = () => {
         //         category: element.category,
         //         subject: element.subject,
         //         description: element.description,
-        //         address: element.address,
-        //         phone: element.phone,
+        //         // address: element.address,
+        //         // phone: element.phone,
         //     })
         // })
 
-        // bcrypt.hash('Ascentis@33', 12)
+        // customers.forEach((element) => {
+        //     CustomerModel.create({
+        //         username: element.username,
+        //         password: bcrypt.hashSync(element.password, 12),//bcrypt.hashSync permet de crypter le mot de passe
+        //         firstName: element.firstName,
+        //         lastName: element.lastName,
+        //         address: element.address,
+        //         phoneNumber: element.phoneNumber,
+        //     })
+        // })
+
+        // bcrypt.hash('Ascentis@33', 12) 
         //     .then((hash) => {
-        //         UserModel.create({
+        //         CustomerModel.create({
         //             username: 'admin@ascentis.fr',
         //             password: hash,
+        //             firstName: 'Admin',
+        //             lastName: 'Ascentis',
+        //             phoneNumber: '01',
         //             roles: ['user', 'admin']
         //         })
         //     })
@@ -63,7 +79,7 @@ const initDb = () => {
         // })
         // .catch(err => console.log(err))
     })
-    .catch(error => console.log('Erreur'))
+    .catch(error => console.log (colors.yellow (`\nErreur d'importation ?`) + (colors.red (`\n${error}`)))) //Si la connexion est établie, affiche le message suivant
 }
 
 

@@ -18,9 +18,12 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false
       },
+
+
+      
       roles: {
         type: DataTypes.STRING,
-        defaultValue: 'user',
+        defaultValue: 'user', //
         set(roles) {
           this.setDataValue('roles', roles.join());
         },

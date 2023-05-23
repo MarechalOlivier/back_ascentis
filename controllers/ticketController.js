@@ -144,8 +144,8 @@ exports.createTicket = (req, res) => {
         category: newTicket.category,
         subject: newTicket.subject,
         description: newTicket.description,
-        address: newTicket.address,
-        phone: newTicket.phone,
+        // address: newTicket.address,
+        // phone: newTicket.phone,
        
     }).then((el) => {
         const msg = 'Un ticket a bien été ajouté.'
