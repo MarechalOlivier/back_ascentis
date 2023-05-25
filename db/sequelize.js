@@ -1,10 +1,9 @@
 const bcrypt = require('bcrypt');
 const { Sequelize, DataTypes } = require('sequelize');                  //Importantion du Module "sequelize" ORM
 const colors = require('colors');                                       //Importation du Module "colors" permet de changer la couleur du texte dans le terminal
-const CustomerModelSequelize = require('../models/customer')            //Importation du modèle "customer"
+const UserModelSequelize = require('../models/user')            //Importation du modèle "customer"
 const TicketModelSequelize = require('../models/ticket')
-const UserModelSequelize = require('../models/user') 
-const customers = require('../mock-customers');
+const users = require('../mock-users');
 const tickets = require('../mock-tickets');                         //Importation du fichier "mock-tickets"
 const cors = require('cors');
 
@@ -14,12 +13,9 @@ const sequelize = new Sequelize('ascentis', 'root', '', {               //Initia
     logging: false                                                      //Pas d'enregistrement de log
 });
 
-
-const CustomerModel = CustomerModelSequelize(sequelize, DataTypes)      //Création du modèle sequelize "CustomerModel" et de la fonction "CustomerModelSequelize" avec les objet sequelize et dataTypes 
+      //Création du modèle sequelize "CustomerModel" et de la fonction "CustomerModelSequelize" avec les objet sequelize et dataTypes 
 const TicketModel = TicketModelSequelize(sequelize, DataTypes)
 const UserModel = UserModelSequelize(sequelize, DataTypes)
-
-
 
 
 //Utilise la bibliothèque sequelize pour intéragir avec la base de donnée                                                             
@@ -40,13 +36,12 @@ const initDb = () => { //
         //         category: element.category,
         //         subject: element.subject,
         //         description: element.description,
-        //         // address: element.address,
-        //         // phone: element.phone,
+                
         //     })
         // })
 
-        // customers.forEach((element) => {
-        //     CustomerModel.create({
+        // users.forEach((element) => {
+        //     UserModel.create({
         //         username: element.username,
         //         password: bcrypt.hashSync(element.password, 12),//bcrypt.hashSync permet de crypter le mot de passe
         //         firstName: element.firstName,
@@ -58,7 +53,7 @@ const initDb = () => { //
 
         // bcrypt.hash('Ascentis@33', 12) 
         //     .then((hash) => {
-        //         CustomerModel.create({
+        //         UserModel.create({
         //             username: 'admin@ascentis.fr',
         //             password: hash,
         //             firstName: 'Admin',
@@ -92,6 +87,6 @@ sequelize.authenticate()                                                //Permet
 
 
 module.exports = {                                                      //Export les fonctionnalités d'un module pour d'autres module
-    sequelize, CustomerModel, TicketModel, UserModel, initDb
+    sequelize, TicketModel, UserModel, initDb
 }
 

@@ -80,24 +80,6 @@ module.exports = (sequelize, DataTypes) => {
               }
         },
 
-        // address: {
-        //     type: DataTypes.JSON,
-        // },
-
-        // phone: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        //     validate: {
-        //         notEmpty: {
-        //             msg: 'Ce champ doit être renseigné.'
-        //         },
-        //         is: {
-        //             args: /^\+?\d{8,15}$/,
-        //             msg: 'Veuillez saisir un numéro de téléphone valide.'
-        //         }
-        //     }
-        // }   
-
     }, {
         timestamps: true,
         createdAt: 'created',

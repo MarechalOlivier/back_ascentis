@@ -28,11 +28,10 @@ app
     .use (cors()) // Permet de gérer les erreurs CORS
 
 const ticketRouter = require('./routes/ticketRoutes') // Importation du fichier ticketRoutes.js
-const customerRouter = require('./routes/customerRoute') // Importation du fichier customerRoutes.js
 const userRouter = require('./routes/userRoute') // Importation du fichier userRoutes.js
 
 
-app.use('/api/customer', customerRouter) // Utilisation des routes du fichier customerRoutes.js
+
 app.use('/api/ticket', ticketRouter) // Utilisation des routes du fichier ticketRoutes.js
 app.use('/api/user', userRouter) // Utilisation des routes du fichier userRoutes.js
 

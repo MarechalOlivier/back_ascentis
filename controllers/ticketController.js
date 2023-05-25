@@ -34,7 +34,7 @@ exports.findAllTickets = (req, res) => {
 exports.findTicketByPk = (req, res) => {
     // Afficher le coworking correspondant à l'id en params, en le récupérant dans la bdd     findByPk()
     TicketModel.findByPk(req.params.id, {
-        include: ReviewModel //---------------
+        
     })
         .then(ticket => {
             if (ticket === null) {

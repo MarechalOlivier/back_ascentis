@@ -1,5 +1,5 @@
 const { Op, UniqueConstraintError, ValidationError } = require('sequelize');
-const { UserModel, ReviewModel, CustomerModel } = require('../db/sequelize')
+const { UserModel, ReviewModel } = require('../db/sequelize')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const privateKey = require('../auth/private_key')
@@ -10,9 +10,8 @@ exports.login = (req, res) => {  //exporter la fonction login qui est visible da
     if(!req.body.username || !req.body.password){ // Si le nom d'utilisateur ou le mot de passe n'est pas fourni
         const msg = "Veuillez fournir un nom d'utilisateur et un mot de passe."
         return res.status(400).json({message: msg})
-    }
-    
-    CustomerModel.findOne({ where : {username: req.body.username}}) // On cherche l'utilisateur dans la base de données avec le nom d'utilisateur fourni dans le body
+    }   
+    UserModel.findOne({ where : {username: req.body.username}}) // On cherche l'utilisateur dans la base de données avec le nom d'utilisateur fourni dans le body
         .then(user => {
             if(!user){ // Si l'utilisateur n'existe pas
                 const msg = "L'utilisateur demandé n'existe pas." // On renvoie un message d'erreur
@@ -30,10 +29,11 @@ exports.login = (req, res) => {  //exporter la fonction login qui est visible da
                     // json web token
                     const token = jwt.sign({ // On crée un token
                         username: user.username,
-                        roles: user.roles,    
+                        roles: user.roles,
+                        data: user.id   
                       }, privateKey, { expiresIn: '1h' }); // Expiration du token au bout d'une heure
 
-                      
+
                     const msg = "L'utilisateur a été connecté avec succès."
                     user.password = "hidden"
                     return res.json({message: msg, user, token})
@@ -70,18 +70,20 @@ exports.signup = (req, res) => {
         })
 }
 
-exports.protect = (req, res, next) => { 
-    const authorizationHeader = req.headers.authorization 
 
-    if(!authorizationHeader){ 
+
+exports.protect = (req, res, next) => {
+    const authorizationHeader = req.headers.authorization // On récupère le header authorization
+
+    if(!authorizationHeader){
         const message = "Un jeton est nécessaire pour accéder à la ressource"
         return res.status(401).json({message})
     }
 
     try {
-        const token = authorizationHeader.split(' ')[1];
-        const decoded = jwt.verify(token, privateKey)
-        req.userId = decoded.data
+        const token = authorizationHeader.split(' ')[1]; // On récupère le token
+        const decoded = jwt.verify(token, privateKey) //
+        req.userId = decoded.data //
     } catch (err) {
         const message = "Jeton invalide"
         return res.status(403).json({message, data: err})
@@ -90,13 +92,17 @@ exports.protect = (req, res, next) => {
     return next();
 }
 
-exports.restrictTo = (...roles) => { 
-    return (req, res, next) => { 
-        
-        CustomerModel.findByPk(req.userId) // 
-            .then(user => { 
+
+////////////////////////////////Restriction d'accès aux ressources/////////////////////////////////////
+exports.restrictTo = (...roles) => {
+    return (req, res, next) => {
+
+        UserModel.findByPk(req.userId) //
+            
+        .then(user => { 
                 console.log(user.username, user.id, roles) 
-                if(!user || !roles.every(role => user.roles.includes(role))){ 
+                
+                if(!user || !roles.every(role => user.roles.includes(role))){//
                     const message = "Droits insuffisants";
                     return res.status(403).json({message}) 
                 }
@@ -108,7 +114,7 @@ exports.restrictTo = (...roles) => {
             })    
     }
 }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 exports.restrictToOwnUser = (req, res, next) => {
     ReviewModel.findByPk(req.params.id)
         .then(review => { 
