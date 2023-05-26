@@ -59,7 +59,7 @@ const initDb = () => { //
         //             firstName: 'Admin',
         //             lastName: 'Ascentis',
         //             phoneNumber: '01',
-        //             roles: ['user', 'admin']
+        //             roles: ['admin']
         //         })
         //     })
         //     .catch(err => console.log(err))

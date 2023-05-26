@@ -29,6 +29,8 @@ exports.login = (req, res) => {  //exporter la fonction login qui est visible da
                     // json web token
                     const token = jwt.sign({ // On crée un token
                         username: user.username,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
                         roles: user.roles,
                         data: user.id   
                       }, privateKey, { expiresIn: '1h' }); // Expiration du token au bout d'une heure
