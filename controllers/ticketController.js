@@ -141,10 +141,10 @@ exports.createTicket = (req, res) => {
         client_number: newTicket.client_number,
         type: newTicket.type,
         urgency: newTicket.urgency,
-        category: newTicket.category,
+        category: newTicket.category, // permet
         subject: newTicket.subject,
-        description: newTicket.description,
-       
+        description: newTicket.description, 
+        UserId: newTicket.UserId //permet
         // address: newTicket.address,
         // phone: newTicket.phone,
        

@@ -79,7 +79,16 @@ module.exports = (sequelize, DataTypes) => {
                 }
               }
         },
-
+///////////////////A garder au cas ou !!!////////////////////////////
+        // UserId: {
+        //     type: DataTypes.INTEGER,
+        //     allowNull: false,
+        //     references: {
+        //       model: 'User', 
+        //       key: 'id',
+        //     },
+        //   },
+/////////////////////////////////////////////////
     }, {
         timestamps: true,
         createdAt: 'created',

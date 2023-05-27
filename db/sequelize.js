@@ -21,13 +21,13 @@ const UserModel = UserModelSequelize(sequelize, DataTypes)
 
 
 //////////////////////////Configuration des clés étrangère//////////////////////////
-// UserModel.hasMany(TicketModel, {
-//     foreignKey: {
-//         allowNull: false,
+UserModel.hasMany(TicketModel, {
+    foreignKey: {
+        allowNull: false,
         
-//     }
-//   });
-// TicketModel.belongsTo(UserModel);
+    }
+  });
+TicketModel.belongsTo(UserModel);
 
 // TicketModel.hasMany(StatusModel, {
 //     foreignKey: {
@@ -55,7 +55,7 @@ const initDb = () => { //
         //         category: element.category,
         //         subject: element.subject,
         //         description: element.description,
-        //         userId: element.userId,       
+        //         // UserId: element.userId,       
         //     })
         // })
 
