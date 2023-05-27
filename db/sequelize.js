@@ -1,10 +1,10 @@
 const bcrypt = require('bcrypt');
 const { Sequelize, DataTypes } = require('sequelize');                  //Importantion du Module "sequelize" ORM
 const colors = require('colors');                                       //Importation du Module "colors" permet de changer la couleur du texte dans le terminal
-const UserModelSequelize = require('../models/user')            //Importation du modèle "customer"
+const UserModelSequelize = require('../models/user')                    //Importation du modèle "customer"
 const TicketModelSequelize = require('../models/ticket')
 const users = require('../mock-users');
-const tickets = require('../mock-tickets');                         //Importation du fichier "mock-tickets"
+const tickets = require('../mock-tickets');                             //Importation du fichier "mock-tickets"
 const cors = require('cors');
 
 const sequelize = new Sequelize('ascentis', 'root', '', {               //Initialise la connexion avec la base de donnée ascentis, l'utilisateur root et pas de mot de passe
@@ -13,12 +13,31 @@ const sequelize = new Sequelize('ascentis', 'root', '', {               //Initia
     logging: false                                                      //Pas d'enregistrement de log
 });
 
-      //Création du modèle sequelize "CustomerModel" et de la fonction "CustomerModelSequelize" avec les objet sequelize et dataTypes 
-const TicketModel = TicketModelSequelize(sequelize, DataTypes)
+/////////////////////////Importation des modèles///////////////////////////////////
+const TicketModel = TicketModelSequelize(sequelize, DataTypes) 
 const UserModel = UserModelSequelize(sequelize, DataTypes)
+// const StatusModel = StatusModelSequelize(sequelize, DataTypes)
+////////////////////////////////////////////////////////////////////////////////////
 
 
-//Utilise la bibliothèque sequelize pour intéragir avec la base de donnée                                                             
+//////////////////////////Configuration des clés étrangère//////////////////////////
+// UserModel.hasMany(TicketModel, {
+//     foreignKey: {
+//         allowNull: false,
+        
+//     }
+//   });
+// TicketModel.belongsTo(UserModel);
+
+// TicketModel.hasMany(StatusModel, {
+//     foreignKey: {
+//         allowNull: false
+//     }
+//   });
+// StatusModel.belongsTo(TicketModel);
+////////////////////////////////////////////////////////////////////////////////////
+
+                                                            
 
                                                                        
 const initDb = () => { //
@@ -36,7 +55,7 @@ const initDb = () => { //
         //         category: element.category,
         //         subject: element.subject,
         //         description: element.description,
-                
+        //         userId: element.userId,       
         //     })
         // })
 

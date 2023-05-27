@@ -6,7 +6,7 @@ const authController = require('../controllers/authController')
 router
     .route('/')
     .get(ticketController.findAllTickets)
-    .post(authController.protect, ticketController.createTicket)
+    .post(authController.protect,ticketController.createTicket)
     
 
 router

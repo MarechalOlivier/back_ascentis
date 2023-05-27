@@ -8,8 +8,7 @@ const tickets = [
         category: "Logiciel",
         subject: "Problème de connexion",
         description: "Nous n'arrivons pas à nous connecter à l'application de comptabilité",
-        // address: { "address": "45 rue Albert", "postCode": 33000, "city": "Bordeaux" },
-        // phone: "0556565656",
+        userId: 1,  
         created: new Date()
     },
     {
@@ -21,8 +20,7 @@ const tickets = [
         category: "Matériel",
         subject: "Problème d'allumage",
         description: "Ordinateur portable ne s'allume plus",
-        // address: { "address": "12 rue de la Paix", "postCode": 75000, "city": "Paris" },
-        // phone: "0101010101",
+        userId: 2,
         created: new Date()
     },
     {
@@ -34,8 +32,7 @@ const tickets = [
         category: "Réseau",
         subject: "Problème de connexion",
         description: "Impossible d'accéder à internet",
-        // address: { "address": " 1 rue de la Liberté", "postCode": 69000, "city": "Lyon" },
-        // phone: "0404040404",
+        userId: 3,
         created: new Date()
     },
     {
@@ -47,8 +44,7 @@ const tickets = [
         category: "Sécurité",
         subject: "Attaque par ransomware",
         description: "Nous avons été victime d'une attaque par ransomware",
-        // address: { "address": "2 rue de la Victoire", "postCode": 59000, "city": "Lille" },
-        // phone: "0303030303",
+        userId: 4,
         created: new Date()
     },
     {
@@ -60,8 +56,7 @@ const tickets = [
         category: "Impression",
         subject: "Problème d'impression",
         description: "L'imprimante ne fonctionne plus",
-        // address: { "address": "3 rue de la République", "postCode": 13000, "city": "Marseille" },
-        // phone: "0202020202",
+        userId: 5,
         created: new Date()
     }
 ];

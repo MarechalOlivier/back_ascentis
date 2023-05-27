@@ -54,6 +54,7 @@ module.exports = (sequelize, DataTypes) => {
                 }
               }
         },
+      
 
 
         roles: {
@@ -87,6 +88,6 @@ module.exports = (sequelize, DataTypes) => {
                 attributes: { exclude: ['password'] }, // Nous spécifions que l'attribut password doit être exclu
             }
         }
-    },
-    )
+    });
+   
 }
