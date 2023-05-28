@@ -3,6 +3,8 @@ const { Sequelize, DataTypes } = require('sequelize');                  //Import
 const colors = require('colors');                                       //Importation du Module "colors" permet de changer la couleur du texte dans le terminal
 const UserModelSequelize = require('../models/user')                    //Importation du modèle "customer"
 const TicketModelSequelize = require('../models/ticket')
+const TechnicianModelSequelize = require('../models/technician')
+const StatusModelSequelize = require('../models/status')
 const users = require('../mock-users');
 const tickets = require('../mock-tickets');                             //Importation du fichier "mock-tickets"
 const cors = require('cors');
@@ -16,6 +18,8 @@ const sequelize = new Sequelize('ascentis', 'root', '', {               //Initia
 /////////////////////////Importation des modèles///////////////////////////////////
 const TicketModel = TicketModelSequelize(sequelize, DataTypes) 
 const UserModel = UserModelSequelize(sequelize, DataTypes)
+const TechnicianModel = TechnicianModelSequelize(sequelize, DataTypes)
+const StatusModel = StatusModelSequelize(sequelize, DataTypes)
 // const StatusModel = StatusModelSequelize(sequelize, DataTypes)
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -23,18 +27,24 @@ const UserModel = UserModelSequelize(sequelize, DataTypes)
 //////////////////////////Configuration des clés étrangère//////////////////////////
 UserModel.hasMany(TicketModel, {
     foreignKey: {
-        allowNull: false,
-        
+        allowNull: false,   
     }
   });
 TicketModel.belongsTo(UserModel);
 
-// TicketModel.hasMany(StatusModel, {
-//     foreignKey: {
-//         allowNull: false
-//     }
-//   });
-// StatusModel.belongsTo(TicketModel);
+StatusModel.hasMany(TicketModel, {
+    foreignKey: {
+        allowNull: true
+    }
+  });
+  TicketModel.belongsTo(StatusModel);
+
+TechnicianModel.hasMany(TicketModel, {
+    foreignKey: {
+        allowNull: true
+    }
+  });
+TicketModel.belongsTo(TechnicianModel);
 ////////////////////////////////////////////////////////////////////////////////////
 
                                                             

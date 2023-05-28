@@ -79,7 +79,7 @@ module.exports = (sequelize, DataTypes) => {
                 }
               }
         },
-///////////////////A garder au cas ou !!!////////////////////////////
+///////////////////A garder au cas ou////////////////////////////
         // UserId: {
         //     type: DataTypes.INTEGER,
         //     allowNull: false,
@@ -91,8 +91,8 @@ module.exports = (sequelize, DataTypes) => {
 /////////////////////////////////////////////////
     }, {
         timestamps: true,
-        createdAt: 'created',
-        updatedAt: true
+        createdAt: 'created_at',
+        updatedAt: 'updated_at',
     })
 
 
